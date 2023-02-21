@@ -7,7 +7,6 @@ with open("config.json") as f:
     username = config["db_username"]
     password = config["db_password"]
     prefix = config["prefix"]
-    token = config["token"]
 
 
 client = pm.MongoClient(f"mongodb+srv://{username}:{password}@cluster0.7fai5k7.mongodb.net/?retryWrites=true&w=majority")

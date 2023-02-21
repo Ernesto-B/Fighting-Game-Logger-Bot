@@ -28,7 +28,7 @@ def main():
                 return
 
             if user_message.startswith(f"{prefix}help"):
-                commands.help.help_cmd(user, message, channel)
+                await commands.help.help_cmd(user, message, channel)
 
 
             if user_message.startswith(f"{prefix}hello"):
