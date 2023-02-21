@@ -1,7 +1,7 @@
 import discord
 import json
 import commands.help
-import db_connection
+import commands.new_user
 
 def main():
     with open("config.json") as f:
@@ -23,6 +23,9 @@ def main():
             user_message = str(message.content)
             user = str(message.author)
             channel = str(message.channel)
+            user_roles = message.author.roles
+            print(f"{user} sent a message in {channel}: {user_message}\n")
+            print(f"{user} has the following roles: {user_roles}\n")
 
             if user == client.user:
                 return
@@ -30,9 +33,16 @@ def main():
             if user_message.startswith(f"{prefix}help"):
                 await commands.help.help_cmd(user, message, channel)
 
-
-            if user_message.startswith(f"{prefix}hello"):
-                await message.channel.send("Hello!")
+            if user_message.startswith(f"{prefix}new_user"):
+                games = []
+                if "Tekken" or "tekken" in user_roles:
+                    games.append("tekken")
+                if "GGST" or "Ggst" or "ggst" or "Guilty Gear" or "guilty gear" in user_roles:
+                    games.append("ggst")
+                if "Smash" or "smash" in user_roles:
+                    games.append("smash")
+                
+                await commands.new_user.new_user_cmd(user, message, channel)
 
         client.run(token)
     run_bot()
